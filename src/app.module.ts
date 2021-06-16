@@ -1,10 +1,25 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { UserModule } from './user/user.module';
+import { ConfigModule } from '@nestjs/config';
+import appConfig from './config/app.config';
+import dbConfig from './config/db.config';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { GraphQLModule } from '@nestjs/graphql';
 
 @Module({
-  imports: [],
-  controllers: [AppController],
-  providers: [AppService],
+  imports: [
+    ConfigModule.forRoot({
+      load: [appConfig],
+      expandVariables: true,
+    }),
+    TypeOrmModule.forRoot(dbConfig),
+    GraphQLModule.forRoot({
+      context: ({ req }) => ({ req }),
+      playground: true,
+      autoSchemaFile: './src/schema.graphql',
+      introspection: true,
+    }),
+    UserModule,
+  ],
 })
 export class AppModule {}
