@@ -15,7 +15,7 @@ const SCHEMA = yup.object({
     .string()
     .oneOf(['development', 'production', 'staging', 'test'])
     .default('development'),
-  PORT: yup.number().default(3000),
+  PORT: yup.number().default(8000),
 });
 
 export default registerAs('app', (): AppConfig => {

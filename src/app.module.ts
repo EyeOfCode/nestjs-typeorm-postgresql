@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
-import { UserModule } from './user/user.module';
-import { ConfigModule } from '@nestjs/config';
+import { UserModule } from './module/user/user.module';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import appConfig from './config/app.config';
-import dbConfig from './config/db.config';
+import dbConfig, { dbFactory } from './config/db.config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { GraphQLModule } from '@nestjs/graphql';
 
@@ -12,7 +12,11 @@ import { GraphQLModule } from '@nestjs/graphql';
       load: [appConfig],
       expandVariables: true,
     }),
-    TypeOrmModule.forRoot(dbConfig),
+    TypeOrmModule.forRootAsync({
+      imports: [ConfigModule.forFeature(dbConfig)],
+      inject: [ConfigService],
+      useFactory: (configService: ConfigService) => dbFactory(configService),
+    }),
     GraphQLModule.forRoot({
       context: ({ req }) => ({ req }),
       playground: true,
