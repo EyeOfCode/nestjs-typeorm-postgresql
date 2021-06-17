@@ -49,6 +49,7 @@ $ npm i --save @nestjs/config
 # yup
 $ npm i --save @nestjs/config
 $ npm install -S yup
+$ npm install nestjs-yup
 
 # graphql
 $ npm i @nestjs/graphql graphql-tools graphql apollo-server-express
