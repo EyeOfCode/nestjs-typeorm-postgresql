@@ -38,19 +38,25 @@ $ npm run test:cov
 
 ```bash
 # postgres typeorm
-$ npm install --save @nestjs/typeorm typeorm pg
+$ npm i --save @nestjs/typeorm typeorm pg
 
 # dotenv
-$ npm install --save dotenv
+$ npm i --save dotenv
 
 # nest js config
 $ npm i --save @nestjs/config
 
 # yup
 $ npm i --save @nestjs/config
-$ npm install -S yup
-$ npm install nestjs-yup
+$ npm i --save yup
+$ npm i nestjs-yup
 
 # graphql
 $ npm i @nestjs/graphql graphql-tools graphql apollo-server-express
+
+# seed
+$ npm i typeorm-seeding
+
+# faker random data
+$ npm i -D @types/faker
 ```

@@ -1,3 +1,4 @@
+import { Hash } from './../../helper/auth';
 import { UserCreateInput } from './../../dto/user/create-user-input.dto';
 import { User } from '../../entity/user/user.entity';
 import { Injectable } from '@nestjs/common';
@@ -16,11 +17,15 @@ export class UserService {
   }
 
   async create(data: UserCreateInput): Promise<User> {
-    const payload = this.userRepository.create(data);
+    const hashPassword = await Hash.hashPassword(data.password);
+    const payload = this.userRepository.create({
+      ...data,
+      password: hashPassword,
+    });
     return this.userRepository.save(payload);
   }
 
-  async getById(id: string): Promise<User> {
+  getById(id: string): Promise<User> {
     return this.userRepository.findOneOrFail(id);
   }
 }

@@ -29,28 +29,34 @@ const SCHEMA = yup.object({
   POSTGRES_LOGS: yup.string(),
 });
 
+export const configDb = {
+  dataBaseType: 'postgres',
+  entityDir: `${root}/**/*.entity{.ts,.js}`,
+  migrationsDir: `${root}/database/migration`,
+  seedsDir: `${root}/database/seed`,
+};
+
 export const dbFactory = async (
   configService: ConfigService,
 ): Promise<TypeOrmModuleOptions> => {
   const setting = {
-    type: 'postgres',
+    type: configDb.dataBaseType,
     host: configService.get<string>('db.POSTGRES_HOST'),
     port: configService.get<number>('db.POSTGRES_PORT'),
     username: configService.get<string>('db.POSTGRES_USER'),
     password: process.env.POSTGRES_PASSWORD,
     database: process.env.POSTGRES_DATABASE,
-    entities: [`${root}/**/*.entity{.ts,.js}`],
+    entities: [configDb.entityDir],
     synchronize: configService.get<boolean>('db.POSTGRES_SYNC'),
-    migrations: [`${root}/database/migrations/*{.ts,.js}`],
+    migrations: [`${configDb.migrationsDir}/*{.ts,.js}`],
     cli: {
       entitiesDir: `${root}/entity`,
-      migrationsDir: `${root}/database/migrations`,
+      migrationsDir: `${configDb.migrationsDir}`,
     },
     migrationsRun: configService.get<boolean>('db.POSTGRES_MIGRATION_RUN'),
     logging: process.env.POSTGRES_LOGS || true,
     logger: 'file',
-    seeds: [`${root}/database/seeds/*{.ts,.js}`],
-    factories: [`${root}/database/factories/*{.ts,.js}`],
+    seeds: [`${configDb.seedsDir}/*{.ts,.js}`],
   } as TypeOrmModuleOptions;
   return setting;
 };
