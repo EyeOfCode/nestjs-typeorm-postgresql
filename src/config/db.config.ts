@@ -15,7 +15,7 @@ export interface DbConfig {
   POSTGRES_USER: string;
   POSTGRES_PASSWORD: string;
   POSTGRES_DATABASE: string;
-  POSTGRES_LOGS: string;
+  POSTGRES_LOGS: boolean;
 }
 
 const SCHEMA = yup.object({
@@ -26,7 +26,7 @@ const SCHEMA = yup.object({
   POSTGRES_USER: yup.string(),
   POSTGRES_PASSWORD: yup.string(),
   POSTGRES_DATABASE: yup.string(),
-  POSTGRES_LOGS: yup.string(),
+  POSTGRES_LOGS: yup.boolean().default(true),
 });
 
 export const configDb = {
