@@ -5,6 +5,7 @@ import appConfig from './config/app.config';
 import dbConfig, { dbFactory } from './config/db.config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { GraphQLModule } from '@nestjs/graphql';
+// import ConfigDB from 'src/database/ormconfig';
 
 @Module({
   imports: [
@@ -12,6 +13,8 @@ import { GraphQLModule } from '@nestjs/graphql';
       load: [appConfig],
       expandVariables: true,
     }),
+    // not validate
+    // TypeOrmModule.forRoot(ConfigDB),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule.forFeature(dbConfig)],
       inject: [ConfigService],

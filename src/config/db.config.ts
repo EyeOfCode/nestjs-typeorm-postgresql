@@ -36,6 +36,17 @@ export const configDb = {
   seedsDir: `${root}/database/seed`,
 };
 
+export const env = {
+  POSTGRES_HOST: process.env.POSTGRES_HOST,
+  POSTGRES_PORT: parseInt(process.env.POSTGRES_PORT, 10),
+  POSTGRES_SYNC: process.env.POSTGRES_SYNC,
+  POSTGRES_MIGRATION_RUN: process.env.POSTGRES_MIGRATION_RUN,
+  POSTGRES_USER: process.env.POSTGRES_USER,
+  POSTGRES_PASSWORD: process.env.POSTGRES_PASSWORD,
+  POSTGRES_DATABASE: process.env.POSTGRES_DATABASE,
+  POSTGRES_LOGS: process.env.POSTGRES_LOGS,
+};
+
 export const dbFactory = async (
   configService: ConfigService,
 ): Promise<TypeOrmModuleOptions> => {
@@ -62,17 +73,6 @@ export const dbFactory = async (
 };
 
 export default registerAs('db', (): DbConfig => {
-  const env = {
-    POSTGRES_HOST: process.env.POSTGRES_HOST,
-    POSTGRES_PORT: parseInt(process.env.POSTGRES_PORT, 10),
-    POSTGRES_SYNC: process.env.POSTGRES_SYNC,
-    POSTGRES_MIGRATION_RUN: process.env.POSTGRES_MIGRATION_RUN,
-    POSTGRES_USER: process.env.POSTGRES_USER,
-    POSTGRES_PASSWORD: process.env.POSTGRES_PASSWORD,
-    POSTGRES_DATABASE: process.env.POSTGRES_DATABASE,
-    POSTGRES_LOGS: process.env.POSTGRES_LOGS,
-  };
-
   let value: DbConfig;
   try {
     value = SCHEMA.validateSync(env, validationOptions);

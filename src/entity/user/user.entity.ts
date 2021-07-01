@@ -8,7 +8,7 @@ import { UseSchema } from 'nestjs-yup';
 @ObjectType()
 @UseSchema(UserSchema)
 export class User extends BaseEntity implements IUser {
-  @Column('text', { nullable: true, unique: true })
+  @Column('text', { unique: true })
   @Field()
   email!: string;
 
@@ -27,4 +27,8 @@ export class User extends BaseEntity implements IUser {
   @Column({ default: false })
   @Field({ defaultValue: false })
   isActive: boolean;
+
+  // @Column('text', { nullable: true })
+  // @Field()
+  // description: string;
 }
