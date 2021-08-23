@@ -21,8 +21,8 @@ scalar DateTime
 
 type Query {
   getUsers: [User!]!
+  getI18n: [User!]!
   getUser(id: String!): User!
-  getTestPay: String!
 }
 
 type Mutation {

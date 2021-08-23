@@ -10,7 +10,6 @@ import { I18nModule, I18nJsonParser, HeaderResolver } from 'nestjs-i18n';
 // import ConfigDB from 'src/database/ormconfig';
 
 import { UserModule } from './module/user/user.module';
-import { PaymentModule } from './module/payment/payment.module';
 
 @Module({
   imports: [
@@ -43,7 +42,6 @@ import { PaymentModule } from './module/payment/payment.module';
       introspection: true,
     }),
     UserModule,
-    PaymentModule,
   ],
 })
 export class AppModule {}
