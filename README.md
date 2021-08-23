@@ -64,9 +64,6 @@ $ npm i -D @types/faker
 ## Other
 
 ```bash
-# Api paypal exp
-$ npm install --save @types/paypal-rest-sdk
-
 # Api middelware exp
 $ npm i @nestjs/passport
 
