@@ -11,6 +11,7 @@ type User {
   firstName: String!
   lastName: String!
   isActive: Boolean!
+  description: String!
 }
 
 """
@@ -21,6 +22,7 @@ scalar DateTime
 type Query {
   getUsers: [User!]!
   getUser(id: String!): User!
+  getTestPay: String!
 }
 
 type Mutation {

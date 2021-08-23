@@ -1,0 +1,6 @@
+{
+  "isNotEmpty": "ist nicht leer",
+  "isEmail": "ist kein E-Mail-Format",
+  "matches": "ist kein {property}-Format",
+  "MatchRole": "{property} ist kein Spiel"
+}

@@ -2,6 +2,9 @@ import { InputType, Field } from '@nestjs/graphql';
 import { UserCreateSchema, IUserCreate } from '../../common-types';
 import { UseSchema } from 'nestjs-yup';
 
+// import { Matches } from 'class-validator';
+// import { MatchValidate } from '../../validator/decorator/match.decorator';
+
 @InputType()
 @UseSchema(UserCreateSchema)
 export class UserCreateInput implements IUserCreate {
@@ -9,9 +12,13 @@ export class UserCreateInput implements IUserCreate {
   email!: string;
 
   @Field()
+  // not use validate yup
+  // @Matches(/((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/)
   password!: string;
 
   @Field()
+  // not use validate yup
+  // @MatchValidate('password')
   confirm_password!: string;
 
   @Field()

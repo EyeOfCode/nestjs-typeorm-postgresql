@@ -60,3 +60,18 @@ $ npm i typeorm-seeding
 # faker random data
 $ npm i -D @types/faker
 ```
+
+## Other
+
+```bash
+# Api paypal exp
+$ npm install --save @types/paypal-rest-sdk
+
+# Api middelware exp
+$ npm i @nestjs/passport
+
+# validate not use yup exp
+
+# i18n
+$ npm i nestjs-i18n
+```

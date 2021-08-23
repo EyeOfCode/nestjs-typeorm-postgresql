@@ -3,6 +3,7 @@ import { Entity, Column } from 'typeorm';
 import { Field, ObjectType } from '@nestjs/graphql';
 import { UserSchema, IUser } from '../../common-types';
 import { UseSchema } from 'nestjs-yup';
+import { Role } from '../../common-types/enum/role';
 
 @Entity()
 @ObjectType()
@@ -28,7 +29,10 @@ export class User extends BaseEntity implements IUser {
   @Field({ defaultValue: false })
   isActive: boolean;
 
-  // @Column('text', { nullable: true })
-  // @Field()
-  // description: string;
+  @Column('text', { nullable: true })
+  @Field()
+  description: string;
+
+  @Column('simple-array', { nullable: true })
+  roles: Role[];
 }

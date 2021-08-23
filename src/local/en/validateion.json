@@ -1,0 +1,6 @@
+{
+  "isNotEmpty": "is not empty",
+  "isEmail": "is not email fomat",
+  "matches": "is not fomat {property}",
+  "MatchRole": "{property} is not match"
+}
