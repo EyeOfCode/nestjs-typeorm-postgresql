@@ -10,6 +10,7 @@ import { I18nModule, I18nJsonParser, HeaderResolver } from 'nestjs-i18n';
 // import ConfigDB from 'src/database/ormconfig';
 
 import { UserModule } from './module/user/user.module';
+import { BlogModule } from './module/blog/blog.module';
 
 @Module({
   imports: [
@@ -42,6 +43,7 @@ import { UserModule } from './module/user/user.module';
       introspection: true,
     }),
     UserModule,
+    BlogModule,
   ],
 })
 export class AppModule {}

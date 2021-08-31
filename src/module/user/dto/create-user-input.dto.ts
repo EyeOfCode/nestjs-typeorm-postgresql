@@ -1,6 +1,7 @@
 import { InputType, Field } from '@nestjs/graphql';
-import { UserCreateSchema, IUserCreate } from '../../common-types';
+import { UserCreateSchema, IUserCreate } from '../../../common-types';
 import { UseSchema } from 'nestjs-yup';
+import { StatusUser } from 'src/common-types/enum/status';
 
 // import { Matches } from 'class-validator';
 // import { MatchValidate } from '../../validator/decorator/match.decorator';
@@ -17,7 +18,7 @@ export class UserCreateInput implements IUserCreate {
   password!: string;
 
   @Field()
-  // not use validate yup
+  // use custom validate and not use validate yup
   // @MatchValidate('password')
   confirm_password!: string;
 
@@ -29,4 +30,7 @@ export class UserCreateInput implements IUserCreate {
 
   @Field({ defaultValue: false })
   isActive: boolean;
+
+  @Field()
+  status: StatusUser;
 }

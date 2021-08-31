@@ -1,9 +1,10 @@
 import { Hash } from './../../helper/auth';
-import { UserCreateInput } from './../../dto/user/create-user-input.dto';
-import { User } from '../../entity/user/user.entity';
+import { UserCreateInput } from './dto/create-user-input.dto';
+import { User } from './entities/user.entity';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { UserUpdateInput } from './dto/update-user-input-dto';
 
 @Injectable()
 export class UserService {
@@ -25,7 +26,17 @@ export class UserService {
     return this.userRepository.save(payload);
   }
 
-  getById(id: string): Promise<User> {
+  async getById(id: string): Promise<User> {
     return this.userRepository.findOneOrFail(id);
+  }
+
+  async update(id: string, data: UserUpdateInput): Promise<boolean> {
+    try {
+      const payload = this.userRepository.create(data);
+      await this.userRepository.update({ id }, payload);
+    } catch (e) {
+      return false;
+    }
+    return true;
   }
 }

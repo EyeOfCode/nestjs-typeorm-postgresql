@@ -12,6 +12,7 @@ type User {
   lastName: String!
   isActive: Boolean!
   description: String!
+  status: String!
 }
 
 """
@@ -23,10 +24,12 @@ type Query {
   getUsers: [User!]!
   getI18n: [User!]!
   getUser(id: String!): User!
+  getBlog: String!
 }
 
 type Mutation {
   createUser(data: UserCreateInput!): User!
+  updateUser(data: UserUpdateInput!, id: String!): User!
 }
 
 input UserCreateInput {
@@ -36,4 +39,12 @@ input UserCreateInput {
   firstName: String!
   lastName: String!
   isActive: Boolean = false
+  status: String!
+}
+
+input UserUpdateInput {
+  firstName: String!
+  lastName: String!
+  isActive: Boolean!
+  status: String!
 }

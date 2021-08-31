@@ -1,3 +1,4 @@
+import { StatusUser } from './../enum/status';
 import * as yup from 'yup';
 
 export const UserSchema = yup.object({
@@ -6,6 +7,11 @@ export const UserSchema = yup.object({
   firstName: yup.string().required('invalid first name'),
   lastName: yup.string().required('invalid last name'),
   isActive: yup.bool().default(false),
+  status: yup.lazy((value) =>
+    value === null
+      ? yup.string().nullable()
+      : yup.mixed<StatusUser>().oneOf(Object.values(StatusUser)),
+  ),
 });
 
 export type IUser = yup.InferType<typeof UserSchema>;
@@ -25,6 +31,11 @@ export const UserUpdateSchema = yup.object({
   firstName: yup.string().required('invalid first name'),
   lastName: yup.string().required('invalid last name'),
   isActive: yup.bool().default(false),
+  status: yup.lazy((value) =>
+    value === null
+      ? yup.string().nullable()
+      : yup.mixed<StatusUser>().oneOf(Object.values(StatusUser)),
+  ),
 });
 
 export type IUserUpdate = yup.InferType<typeof UserUpdateSchema>;
