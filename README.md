@@ -71,4 +71,6 @@ $ npm i @nestjs/passport
 
 # i18n
 $ npm i nestjs-i18n
+
+# blog service test transection
 ```

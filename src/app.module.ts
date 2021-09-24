@@ -11,12 +11,14 @@ import { I18nModule, I18nJsonParser, HeaderResolver } from 'nestjs-i18n';
 
 import { UserModule } from './module/user/user.module';
 import { BlogModule } from './module/blog/blog.module';
+import { AuthModule } from './module/auth/auth.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       load: [appConfig],
       expandVariables: true,
+      isGlobal: true,
     }),
 
     // not validate
@@ -44,6 +46,7 @@ import { BlogModule } from './module/blog/blog.module';
     }),
     UserModule,
     BlogModule,
+    AuthModule,
   ],
 })
 export class AppModule {}

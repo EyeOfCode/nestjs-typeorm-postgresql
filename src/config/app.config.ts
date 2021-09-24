@@ -8,6 +8,8 @@ dotenv.config({ path: '.env' });
 export interface AppConfig {
   NODE_ENV: string;
   PORT: number;
+  JWT_SECRET_KEY: string;
+  JWT_EXPIRES_IN: string;
 }
 
 const SCHEMA = yup.object({
@@ -16,13 +18,13 @@ const SCHEMA = yup.object({
     .oneOf(['development', 'production', 'staging', 'test'])
     .default('development'),
   PORT: yup.number().default(8000),
+  JWT_SECRET_KEY: yup.string().required(),
+  JWT_EXPIRES_IN: yup.string().default('60s'),
+  SALT_ROUND: yup.number().default(8),
 });
 
-export default registerAs('app', (): AppConfig => {
-  const env = {
-    NODE_ENV: process.env.NODE_ENV,
-    PORT: process.env.PORT ? parseInt(process.env.PORT) : undefined,
-  };
+export default registerAs('app', async (): Promise<AppConfig> => {
+  const env = await SCHEMA.validate(process.env);
 
   let value: AppConfig;
   try {
