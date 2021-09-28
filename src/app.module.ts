@@ -1,3 +1,5 @@
+import { JwtGuard } from 'src/middleware/guard/jwt.guard';
+import { APP_GUARD } from '@nestjs/core';
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import appConfig from './config/app.config';
@@ -43,6 +45,8 @@ import { AuthModule } from './module/auth/auth.module';
       playground: true,
       autoSchemaFile: './src/schema.graphql',
       introspection: true,
+      installSubscriptionHandlers: true,
+      debug: true,
     }),
     UserModule,
     BlogModule,

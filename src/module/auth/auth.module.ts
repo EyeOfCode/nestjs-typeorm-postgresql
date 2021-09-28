@@ -9,14 +9,12 @@ import { ConfigService } from '@nestjs/config';
 
 @Module({
   imports: [
-    PassportModule.register({
-      defaultStrategy: 'jwt',
-    }),
+    PassportModule,
     JwtModule.registerAsync({
       inject: [ConfigService],
       useFactory: (config: ConfigService) => ({
-        secret: config.get('auth.JWT_SECRET_KEY'),
-        signOptions: { expiresIn: config.get('auth.JWT_EXPIRES_IN') },
+        secret: config.get('app.JWT_SECRET_KEY'),
+        signOptions: { expiresIn: config.get('app.JWT_EXPIRES_IN') },
       }),
     }),
     forwardRef(() => UserModule),

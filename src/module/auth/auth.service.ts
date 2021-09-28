@@ -1,10 +1,11 @@
+import { User } from './../user/entities/user.entity';
 import { UserService } from './../user/user.service';
 import { AuthResponse } from './response/auth.response';
 import { Inject, Injectable } from '@nestjs/common';
 import { LoginInput } from './dto/login-auth.input';
 import { JwtService } from '@nestjs/jwt';
-import * as bcrypt from 'bcryptjs';
 import { ConfigService } from '@nestjs/config';
+import { Hash } from '../../helper/auth';
 
 @Injectable()
 export class AuthService {
@@ -19,7 +20,7 @@ export class AuthService {
 
   generateToken(id: string, role: string[]): string {
     return this.jwtService.sign({
-      iss: this.config.get('auth.jwtSecret'),
+      iss: this.config.get('app.JWT_SECRET_KEY'),
       sub: id,
       role,
     });
@@ -31,7 +32,10 @@ export class AuthService {
       throw new Error('email not found');
     }
 
-    const isPasswordMatch = await bcrypt.compare(data.password, user.password);
+    const isPasswordMatch = await Hash.verifyPassword(
+      data.password,
+      user.password,
+    );
     if (!isPasswordMatch) {
       throw new Error('password not math');
     }
@@ -40,7 +44,7 @@ export class AuthService {
     return { token: accessToken };
   }
 
-  async validateToken(data: any): Promise<boolean> {
-    return true;
+  async validateToken(id: string): Promise<User> {
+    return this.userService.getById(id);
   }
 }

@@ -19,7 +19,7 @@ const SCHEMA = yup.object({
     .default('development'),
   PORT: yup.number().default(8000),
   JWT_SECRET_KEY: yup.string().required(),
-  JWT_EXPIRES_IN: yup.string().default('60s'),
+  JWT_EXPIRES_IN: yup.string().default('1d'),
   SALT_ROUND: yup.number().default(8),
 });
 

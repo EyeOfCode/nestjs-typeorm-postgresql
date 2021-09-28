@@ -7,7 +7,7 @@ import { AuthService } from './auth.service';
 export class AuthResolver {
   constructor(private readonly authService: AuthService) {}
 
-  @Mutation()
+  @Mutation(() => AuthResponse)
   async login(@Args('data') data: LoginInput): Promise<AuthResponse> {
     return this.authService.login(data);
   }

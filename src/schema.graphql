@@ -28,6 +28,10 @@ type User {
   status: String!
 }
 
+type AuthResponse {
+  token: String!
+}
+
 type Query {
   getUsers: [User!]!
   getI18n: [User!]!
@@ -39,6 +43,7 @@ type Mutation {
   createUser(data: UserCreateInput!): User!
   updateUser(data: UserUpdateInput!, id: String!): User!
   createBlog(data: CreateBlogInput!): Blog!
+  login(data: LoginInput!): AuthResponse!
 }
 
 input UserCreateInput {
@@ -59,4 +64,9 @@ input UserUpdateInput {
 input CreateBlogInput {
   status: String!
   description: String!
+}
+
+input LoginInput {
+  email: String!
+  password: String!
 }
