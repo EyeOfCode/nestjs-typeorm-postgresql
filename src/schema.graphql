@@ -2,19 +2,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type Blog {
-  id: String!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  status: String!
-  description: String!
-}
-
-"""
-A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
-"""
-scalar DateTime
-
 type User {
   id: String!
   createdAt: DateTime!
@@ -28,6 +15,11 @@ type User {
   status: String!
 }
 
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
 type AuthResponse {
   token: String!
 }
@@ -36,13 +28,11 @@ type Query {
   getUsers: [User!]!
   getI18n: [User!]!
   getUser(id: String!): User!
-  getBlog: String!
 }
 
 type Mutation {
   createUser(data: UserCreateInput!): User!
   updateUser(data: UserUpdateInput!, id: String!): User!
-  createBlog(data: CreateBlogInput!): Blog!
   login(data: LoginInput!): AuthResponse!
 }
 
@@ -59,11 +49,6 @@ input UserUpdateInput {
   lastName: String!
   isActive: Boolean!
   status: String!
-}
-
-input CreateBlogInput {
-  status: String!
-  description: String!
 }
 
 input LoginInput {

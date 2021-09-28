@@ -27,7 +27,7 @@ export class AuthService {
   }
 
   async login(data: LoginInput): Promise<AuthResponse> {
-    const user = await this.userService.getEmail(data.email);
+    const user = await this.userService.getByEmail(data.email);
     if (!user) {
       throw new Error('email not found');
     }

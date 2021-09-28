@@ -14,11 +14,11 @@ export class UserService {
     private readonly userRepository: Repository<User>,
   ) {}
 
-  async getAll(): Promise<User[]> {
+  async getList(): Promise<User[]> {
     return this.userRepository.find();
   }
 
-  async getEmail(email: string): Promise<User | null> {
+  async getByEmail(email: string): Promise<User | null> {
     const user = await this.userRepository.findOne({ email });
     if (user) {
       return user;

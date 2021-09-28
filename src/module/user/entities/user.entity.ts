@@ -5,7 +5,6 @@ import { Field, ObjectType } from '@nestjs/graphql';
 import { UserSchema, IUser } from '../../../common-types';
 import { UseSchema } from 'nestjs-yup';
 import { Role } from '../../../common-types/enum/role';
-import { Blog } from '../../blog/entities/blog.entity';
 
 @Entity()
 @ObjectType()
@@ -41,8 +40,4 @@ export class User extends BaseEntity implements IUser {
   @Column({ type: 'enum', enum: StatusUser, default: StatusUser.PENDING })
   @Field()
   status: StatusUser;
-
-  @OneToMany(() => Blog, (blog: Blog) => blog.user)
-  @JoinColumn()
-  blog: Blog[];
 }

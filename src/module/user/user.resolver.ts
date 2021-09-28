@@ -19,16 +19,18 @@ export class UserResolver {
 
   @Query(() => [User])
   async getUsers(): Promise<User[]> {
-    return this.userService.getAll();
+    return this.userService.getList();
   }
 
+  @UseGuards(new JwtGuard(), RolesGuard)
+  @Roles(Role.USER, Role.ADMIN)
   @Query(() => [User])
   async getI18n(@I18nLang() lang: string): Promise<User[]> {
     return this.i18n.t('message.profile', { lang: lang, args: { id: 'test' } });
   }
 
   @UseGuards(new JwtGuard(), RolesGuard)
-  @Roles(Role.USER, Role.ADMIN)
+  @Roles(Role.USER)
   @Query(() => User)
   async getUser(@Args('id') id: string): Promise<User> {
     return this.userService.getById(id);

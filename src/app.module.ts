@@ -1,5 +1,3 @@
-import { JwtGuard } from 'src/middleware/guard/jwt.guard';
-import { APP_GUARD } from '@nestjs/core';
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import appConfig from './config/app.config';
@@ -12,7 +10,6 @@ import { I18nModule, I18nJsonParser, HeaderResolver } from 'nestjs-i18n';
 // import ConfigDB from 'src/database/ormconfig';
 
 import { UserModule } from './module/user/user.module';
-import { BlogModule } from './module/blog/blog.module';
 import { AuthModule } from './module/auth/auth.module';
 
 @Module({
@@ -49,7 +46,6 @@ import { AuthModule } from './module/auth/auth.module';
       debug: true,
     }),
     UserModule,
-    BlogModule,
     AuthModule,
   ],
 })
