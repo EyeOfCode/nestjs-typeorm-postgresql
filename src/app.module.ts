@@ -11,6 +11,7 @@ import { I18nModule, I18nJsonParser, HeaderResolver } from 'nestjs-i18n';
 
 import { UserModule } from './module/user/user.module';
 import { AuthModule } from './module/auth/auth.module';
+import { ShopModule } from './module/shop/shop.module';
 
 @Module({
   imports: [
@@ -47,6 +48,7 @@ import { AuthModule } from './module/auth/auth.module';
     }),
     UserModule,
     AuthModule,
+    ShopModule,
   ],
 })
 export class AppModule {}

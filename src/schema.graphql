@@ -2,6 +2,22 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Shop {
+  id: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  name: String!
+  address: String!
+  isOpen: Boolean!
+  description: String!
+  status: String!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
 type User {
   id: String!
   createdAt: DateTime!
@@ -15,11 +31,6 @@ type User {
   status: String!
 }
 
-"""
-A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
-"""
-scalar DateTime
-
 type AuthResponse {
   token: String!
 }
@@ -28,12 +39,16 @@ type Query {
   getUsers: [User!]!
   getI18n: [User!]!
   getUser(id: String!): User!
+  shop(id: Int!): Shop!
 }
 
 type Mutation {
   createUser(data: UserCreateInput!): User!
   updateUser(data: UserUpdateInput!, id: String!): User!
   login(data: LoginInput!): AuthResponse!
+  createShop(createShopInput: CreateShopInput!): Shop!
+  updateShop(updateShopInput: UpdateShopInput!): Shop!
+  removeShop(id: Int!): Shop!
 }
 
 input UserCreateInput {
@@ -54,4 +69,15 @@ input UserUpdateInput {
 input LoginInput {
   email: String!
   password: String!
+}
+
+input CreateShopInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateShopInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
 }

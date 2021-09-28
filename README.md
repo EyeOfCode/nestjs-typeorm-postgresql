@@ -103,7 +103,8 @@ $ npm i passport-jwt
 ```bash
 ## validate not use yup exp
 # note
-- exp validate yup and not use yup
+- exp validate yup
+- exp custom validate not use yup
 ```
 
 ```bash
