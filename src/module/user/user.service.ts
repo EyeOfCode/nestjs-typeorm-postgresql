@@ -5,6 +5,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { UserUpdateInput } from './dto/update-user-input-dto';
+import { StatusUser } from '../../common-types/enum/status';
 
 @Injectable()
 export class UserService {
@@ -17,10 +18,19 @@ export class UserService {
     return this.userRepository.find();
   }
 
+  async getEmail(email: string): Promise<User | null> {
+    const user = await this.userRepository.findOne({ email });
+    if (user) {
+      return user;
+    }
+    return null;
+  }
+
   async create(data: UserCreateInput): Promise<User> {
     const hashPassword = await Hash.hashPassword(data.password);
     const payload = this.userRepository.create({
       ...data,
+      status: StatusUser.PENDING,
       password: hashPassword,
     });
     return this.userRepository.save(payload);

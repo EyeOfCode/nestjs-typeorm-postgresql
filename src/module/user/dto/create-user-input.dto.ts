@@ -27,10 +27,4 @@ export class UserCreateInput implements IUserCreate {
 
   @Field()
   lastName!: string;
-
-  @Field({ defaultValue: false })
-  isActive: boolean;
-
-  @Field()
-  status: StatusUser;
 }

@@ -21,6 +21,32 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
+## DB
+
+```bash
+# migration
+
+# create
+$ npm run migration:create [name]
+
+# generate follow entity
+$ npm run migration:generate
+
+# up
+$ npm run migration:run
+
+# down
+$ npm run migration:down
+
+# seed
+
+# seed
+$ npm run seed:run
+
+# drop
+$ npm run seed:drop
+```
+
 ## Test
 
 ```bash
@@ -64,11 +90,27 @@ $ npm i -D @types/faker
 ## Other
 
 ```bash
-# Api middelware exp
+## Api middelware exp
+# note
+- validate encode and decode jwt
+- validate roles user
+
 $ npm i @nestjs/passport
+$ npm i @nestjs/jwt
+$ npm i passport-jwt
+```
 
-# validate not use yup exp
+```bash
+## validate not use yup exp
+# note
+- exp validate yup and not use yup
+```
 
-# i18n
+```bash
+## i18n
 $ npm i nestjs-i18n
+```
+
+```bash
+## blog service test transection
 ```

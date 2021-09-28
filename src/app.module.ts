@@ -1,3 +1,5 @@
+import { JwtGuard } from 'src/middleware/guard/jwt.guard';
+import { APP_GUARD } from '@nestjs/core';
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import appConfig from './config/app.config';
@@ -11,12 +13,14 @@ import { I18nModule, I18nJsonParser, HeaderResolver } from 'nestjs-i18n';
 
 import { UserModule } from './module/user/user.module';
 import { BlogModule } from './module/blog/blog.module';
+import { AuthModule } from './module/auth/auth.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       load: [appConfig],
       expandVariables: true,
+      isGlobal: true,
     }),
 
     // not validate
@@ -41,9 +45,12 @@ import { BlogModule } from './module/blog/blog.module';
       playground: true,
       autoSchemaFile: './src/schema.graphql',
       introspection: true,
+      installSubscriptionHandlers: true,
+      debug: true,
     }),
     UserModule,
     BlogModule,
+    AuthModule,
   ],
 })
 export class AppModule {}
