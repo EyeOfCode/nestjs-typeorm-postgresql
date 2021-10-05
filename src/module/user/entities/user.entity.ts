@@ -1,6 +1,6 @@
 import { StatusUser } from './../../../common-types/enum/status';
 import { BaseEntity } from '../../../entity/base.entity';
-import { Entity, Column, OneToMany, JoinColumn } from 'typeorm';
+import { Entity, Column, JoinColumn, Index, OneToMany } from 'typeorm';
 import { Field, ObjectType } from '@nestjs/graphql';
 import { UserSchema, IUser } from '../../../common-types';
 import { UseSchema } from 'nestjs-yup';
@@ -35,7 +35,7 @@ export class User extends BaseEntity implements IUser {
   @Field()
   description: string;
 
-  @Column('simple-array', { nullable: true })
+  @Column('simple-array', { nullable: true, default: 'user' })
   roles: Role[];
 
   @Column({ type: 'enum', enum: StatusUser, default: StatusUser.PENDING })
@@ -44,5 +44,5 @@ export class User extends BaseEntity implements IUser {
 
   @OneToMany(() => Shop, (shop: Shop) => shop.user)
   @JoinColumn()
-  shop: Shop[];
+  shop: [Shop];
 }

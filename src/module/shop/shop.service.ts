@@ -1,9 +1,9 @@
+import { User } from './../user/entities/user.entity';
 import { StatusShop } from './../../common-types/enum/status';
 import { Shop } from './entities/shop.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Injectable } from '@nestjs/common';
 import { CreateShopInput } from './dto/create-shop.input';
-import { UpdateShopInput } from './dto/update-shop.input';
 import { Repository } from 'typeorm';
 
 @Injectable()
@@ -13,9 +13,10 @@ export class ShopService {
     private readonly shopRepository: Repository<Shop>,
   ) {}
 
-  async create(data: CreateShopInput): Promise<Shop> {
+  async create(data: CreateShopInput, user: User): Promise<Shop> {
     const payload = this.shopRepository.create({
       ...data,
+      user,
       status: StatusShop.PENDING,
     });
     return this.shopRepository.save(payload);
@@ -25,15 +26,15 @@ export class ShopService {
     return this.shopRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} shop`;
-  }
+  // findOne(id: number) {
+  //   return `This action returns a #${id} shop`;
+  // }
 
-  update(id: number, updateShopInput: UpdateShopInput) {
-    return `This action updates a #${id} shop`;
-  }
+  // update(id: number, updateShopInput: UpdateShopInput) {
+  //   return `This action updates a #${id} shop`;
+  // }
 
-  remove(id: number) {
-    return `This action removes a #${id} shop`;
-  }
+  // remove(id: number) {
+  //   return `This action removes a #${id} shop`;
+  // }
 }

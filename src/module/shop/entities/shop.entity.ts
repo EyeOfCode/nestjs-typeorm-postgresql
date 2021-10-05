@@ -2,7 +2,14 @@ import { ShopSchema, IShop } from './../../../common-types/shop/index';
 import { User } from './../../user/entities/user.entity';
 import { StatusShop } from './../../../common-types/enum/status';
 import { BaseEntity } from '../../../entity/base.entity';
-import { Entity, Column, OneToOne, JoinColumn } from 'typeorm';
+import {
+  Entity,
+  Column,
+  JoinColumn,
+  Index,
+  OneToMany,
+  ManyToOne,
+} from 'typeorm';
 import { Field, ObjectType } from '@nestjs/graphql';
 import { UseSchema } from 'nestjs-yup';
 
@@ -30,7 +37,7 @@ export class Shop extends BaseEntity implements IShop {
   @Field()
   status: StatusShop;
 
-  @OneToOne(() => Shop, (shop: Shop) => shop.user)
+  @ManyToOne(() => User, (user: User) => user.shop)
   @JoinColumn()
   user: User;
 }
