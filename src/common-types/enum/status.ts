@@ -1,7 +1,7 @@
-export enum StatusBlog {
+export enum StatusShop {
   PENDING = 'pending',
-  PUBLIC = 'public',
-  PRIVATE = 'private',
+  APPROVED = 'approved',
+  REJECTED = 'rejected',
 }
 
 export enum StatusUser {
